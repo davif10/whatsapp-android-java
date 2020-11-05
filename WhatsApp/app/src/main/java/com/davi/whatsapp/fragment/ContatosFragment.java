@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 
 import com.davi.whatsapp.R;
 import com.davi.whatsapp.activity.ChatActivity;
+import com.davi.whatsapp.activity.GrupoActivity;
 import com.davi.whatsapp.adapter.ContatosAdapter;
 import com.davi.whatsapp.config.ConfiguracaoFirebase;
 import com.davi.whatsapp.helper.RecyclerItemClickListener;
@@ -73,9 +74,16 @@ public class ContatosFragment extends Fragment {
                             @Override
                             public void onItemClick(View view, int position) {
                                 Usuario usuarioSelecionado = listaContatos.get(position);
-                                Intent i = new Intent(getActivity(), ChatActivity.class);
-                                i.putExtra("chatContato",usuarioSelecionado);
-                                startActivity(i);
+                                boolean cabecalho = usuarioSelecionado.getEmail().isEmpty();
+                                if(cabecalho){
+                                    Intent i = new Intent(getActivity(), GrupoActivity.class);
+                                    startActivity(i);
+                                }else{
+                                    Intent i = new Intent(getActivity(), ChatActivity.class);
+                                    i.putExtra("chatContato",usuarioSelecionado);
+                                    startActivity(i);
+                                }
+
                             }
 
                             @Override
@@ -90,6 +98,15 @@ public class ContatosFragment extends Fragment {
                         }
                 )
         );
+
+        /*Define usuário com o e-mail vazio
+        em caso de email vazio será utilizado como cabeçalho
+        exibindo novo grupo
+         */
+        Usuario itemGrupo = new Usuario();
+        itemGrupo.setNome("Novo grupo");
+        itemGrupo.setEmail("");
+        listaContatos.add(itemGrupo);
 
         return view;
     }

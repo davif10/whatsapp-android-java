@@ -10,14 +10,13 @@ import com.davi.whatsapp.adapter.MensagensAdapter;
 import com.davi.whatsapp.config.ConfiguracaoFirebase;
 import com.davi.whatsapp.helper.Base64Custom;
 import com.davi.whatsapp.helper.UsuarioFirebase;
+import com.davi.whatsapp.model.Conversa;
 import com.davi.whatsapp.model.Mensagem;
 import com.davi.whatsapp.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,7 +41,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -225,9 +223,22 @@ public class ChatActivity extends AppCompatActivity {
             //Salvar Mensagem para o destinatario
             salvarMensagem(idUsuarioDestinatario,idUsuarioRemetente,mensagem);
 
+            //Salvar conversa
+            salvarConversa(mensagem);
+
         }else{
             Toast.makeText(ChatActivity.this, "Digite uma mensagem para enviar!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void salvarConversa(Mensagem msg){
+        Conversa conversaRemetente = new Conversa();
+        conversaRemetente.setIdRemetente(idUsuarioRemetente);
+        conversaRemetente.setIdDestinatario(idUsuarioDestinatario);
+        conversaRemetente.setUltimaMensagem(msg.getMensagem());
+        conversaRemetente.setUsuarioExibicao(usuarioDestinatario);
+
+        conversaRemetente.salvar();
     }
 
     private void salvarMensagem(String idRemetente,String idDestinatario, Mensagem msg){

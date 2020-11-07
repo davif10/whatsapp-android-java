@@ -17,10 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.CadastroGrupoActivity"
+            android:label="@string/title_activity_cadastro_grupo"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.GrupoActivity">
+
+        </activity>
+        <activity
             android:name=".activity.GrupoActivity"
             android:label="@string/title_activity_grupo"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".activity.MainActivity"></activity>
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.ChatActivity"
             android:label="@string/title_activity_chat"

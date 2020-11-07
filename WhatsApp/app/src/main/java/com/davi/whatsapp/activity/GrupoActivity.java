@@ -1,5 +1,6 @@
 package com.davi.whatsapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.davi.whatsapp.adapter.ContatosAdapter;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class GrupoActivity extends AppCompatActivity {
     private DatabaseReference usuarioRef;
     private FirebaseUser usuarioAtual;
     private Toolbar toolbar;
+    private FloatingActionButton fabAvancarCadastro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +52,6 @@ public class GrupoActivity extends AppCompatActivity {
         toolbar.setTitle("Novo Grupo");
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Confugurações Iniciais
@@ -64,6 +59,7 @@ public class GrupoActivity extends AppCompatActivity {
         recyclerMembros = findViewById(R.id.recyclerMembros);
         usuarioRef = ConfiguracaoFirebase.getFirebaseDatabase().child("usuarios");
         usuarioAtual = UsuarioFirebase.getUsuarioAtual();
+        fabAvancarCadastro = findViewById(R.id.fabAvancarCadastro);
 
         //Configurando adapter
         contatosAdapter = new ContatosAdapter(listaMembros,getApplicationContext());
@@ -149,6 +145,15 @@ public class GrupoActivity extends AppCompatActivity {
                 )
         );
 
+        //Configurar floating action button
+        fabAvancarCadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GrupoActivity.this,CadastroGrupoActivity.class);
+                i.putExtra("membros",(Serializable) listaMembrosSelecionados);
+                startActivity(i);
+            }
+        });
     }//Fim onCreate
 
     public void atualizarMembrosToolbar(){

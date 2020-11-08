@@ -10,7 +10,6 @@ import com.davi.whatsapp.helper.RecyclerItemClickListener;
 import com.davi.whatsapp.helper.UsuarioFirebase;
 import com.davi.whatsapp.model.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,7 +58,7 @@ public class GrupoActivity extends AppCompatActivity {
         recyclerMembros = findViewById(R.id.recyclerMembros);
         usuarioRef = ConfiguracaoFirebase.getFirebaseDatabase().child("usuarios");
         usuarioAtual = UsuarioFirebase.getUsuarioAtual();
-        fabAvancarCadastro = findViewById(R.id.fabAvancarCadastro);
+        fabAvancarCadastro = findViewById(R.id.fabSalvarGrupo);
 
         //Configurando adapter
         contatosAdapter = new ContatosAdapter(listaMembros,getApplicationContext());

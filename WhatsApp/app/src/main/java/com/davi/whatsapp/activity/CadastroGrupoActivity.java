@@ -159,6 +159,8 @@ public class CadastroGrupoActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     String url = task.getResult().toString();
                                     grupo.setFoto(url);
+                                    Toast.makeText(CadastroGrupoActivity.this,
+                                            "Sucesso ao fazer upload da imagem",Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }

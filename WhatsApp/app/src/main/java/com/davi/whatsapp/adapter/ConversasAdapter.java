@@ -28,6 +28,9 @@ public class ConversasAdapter extends RecyclerView.Adapter<ConversasAdapter.MyVi
         this.conversas = lista;
         this.context = c;
     }
+    public List<Conversa> getConversas(){
+        return this.conversas;
+    }
 
     @NonNull
     @Override

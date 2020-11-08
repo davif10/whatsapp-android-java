@@ -146,8 +146,8 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                     //Recuperar dados da imagem para o firebase
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     imagem.compress(Bitmap.CompressFormat.JPEG,70,baos);
-                    //Salvar imagem no Firebase
                     byte[] dadosImagem = baos.toByteArray();
+                    //Salvar imagem no Firebase
                     StorageReference imageRef=storageReference
                             .child("imagens")
                             .child("perfil")
